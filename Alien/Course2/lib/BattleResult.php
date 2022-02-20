@@ -6,7 +6,7 @@ class BattleResult {
 
     private $losingShip;
 // You can place ship in front of $winningShip and $losingShip as in Chapter 3 (not working here)
-    public function __construct($usedJediPowers,  $winningShip,  $losingShip) {
+    public function __construct($usedJediPowers,  Ship $winningShip = null,  Ship $losingShip= null) {
         $this ->usedJediPowers= $usedJediPowers;
         $this -> winningShip = $winningShip;
         $this-> losingShip = $losingShip;
@@ -22,7 +22,7 @@ class BattleResult {
     }
 
     /**
-     * @return Ship
+     * @return Ship|null
      */
     public function getWinningShip()
     {
@@ -30,11 +30,13 @@ class BattleResult {
     }
 
     /**
-     * @return Ship
+     * @return Ship|null
      */
     public function getLosingShip()
     {
         return $this->losingShip;
     }
-
+public function isThereAWinner(){
+        return $this->getWinningShip() !== null;
+}
 }
