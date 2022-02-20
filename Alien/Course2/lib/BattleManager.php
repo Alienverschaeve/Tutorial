@@ -1,5 +1,11 @@
 <?php
 class BattleManager
+/* Our complex flighting algorithm!
+*
+ * @return BattleResult
+ */
+
+
 {
     function battle(Ship $ship1, $ship1Quantity, Ship $ship2, $ship2Quantity)
     {
@@ -42,12 +48,8 @@ class BattleManager
             $losingShip = $ship2;
             $usedJediPowers = $ship1UsedJediPowers;
         }
+return new BattleResult ($usedJediPowers, $winningShip,$losingShip);
 
-        return array(
-            'winning_ship' => $winningShip,
-            'losing_ship' => $losingShip,
-            'used_jedi_powers' => $usedJediPowers,
-        );
     }
 
 
