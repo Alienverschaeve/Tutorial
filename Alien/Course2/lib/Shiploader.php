@@ -1,5 +1,6 @@
 <?php
 class Shiploader {
+    private $pdo;
     /**
      * @return Ship[]
      */
