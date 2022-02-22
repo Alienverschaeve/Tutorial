@@ -1,5 +1,5 @@
 <?php
-class Shiploader {
+class ShipLoader {
     private $pdo;
     /**
      * @return Ship[]
@@ -57,7 +57,8 @@ class Shiploader {
      */
      private function getPDO()
      {
-         if($this->pdo===null);{
+         if($this->pdo===null)
+         {
              $pdo = new PDO('mysql:host=localhost;dbname=oo_battle', 'root');
              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $this->pdo=$pdo;

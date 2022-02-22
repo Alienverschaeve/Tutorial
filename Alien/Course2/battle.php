@@ -15,8 +15,8 @@ if (!$ship1Id || !$ship2Id) {
     die;
 }
 
-$ship1 = $shiploader->findOneById($ship1Id);
-$ship2 = $shiploader->findOneById($ship2Id);
+$ship1 = $shipLoader->findOneById($ship1Id);
+$ship2 = $shipLoader->findOneById($ship2Id);
 
 if (!$ship1 || !$ship2) {
     header('Location: /index.php?error=bad_ships');
