@@ -1,19 +1,23 @@
 <?php
 require __DIR__ . '/bootstrap.php';
+
 $shipLoader = new ShipLoader();
 $ships =$shipLoader -> getShips();
 
-$ship1Name = isset($_POST['ship1_name']) ? $_POST['ship1_name'] : null;
+$ship1Id = isset($_POST['ship1_id']) ? $_POST['ship1_id'] : null;
 $ship1Quantity = isset($_POST['ship1_quantity']) ? $_POST['ship1_quantity'] : 1;
-$ship2Name = isset($_POST['ship2_name']) ? $_POST['ship2_name'] : null;
+$ship2Id = isset($_POST['ship2_id']) ? $_POST['ship2_id'] : null;
 $ship2Quantity = isset($_POST['ship2_quantity']) ? $_POST['ship2_quantity'] : 1;
 
-if (!$ship1Name || !$ship2Name) {
+if (!$ship1Id || !$ship2Id) {
     header('Location: /index.php?error=missing_data');
     die;
 }
 
-if (!isset($ships[$ship1Name]) || !isset($ships[$ship2Name])) {
+$ship1 = $shiploader->findOneById($ship1Id);
+$ship2 = $shiploader->findOneById($ship2Id);
+
+if (!$ship1 || !$ship2) {
     header('Location: /index.php?error=bad_ships');
     die;
 }
@@ -23,8 +27,6 @@ if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
     die;
 }
 
-$ship1 = $ships[$ship1Name];
-$ship2 = $ships[$ship2Name];
 
 $battleManager= new BattleManager();
 $battleResult = $battleManager -> battle($ship1, $ship1Quantity, $ship2, $ship2Quantity);
@@ -66,7 +68,7 @@ $battleResult = $battleManager -> battle($ship1, $ship1Quantity, $ship2, $ship2Q
             </div>
             <div class="result-box center-block">
                 <h3 class="text-center audiowide">
-                    Winner:
+                    Winner
                     <?php if ($battleResult->isThereAWinner()): ?>
                         <?php echo $battleResult->getWinningShip()->getName(); ?>
                     <?php else: ?>
